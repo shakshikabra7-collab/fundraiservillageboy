@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Help Save A Child's Home</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+font-family: Arial;
+text-align:center;
+background:#f6f6f6;
+margin:0;
+}
+
+.header{
+background:#c62828;
+color:white;
+padding:20px;
+font-size:28px;
+font-weight:bold;
+}
+
+.container{
+padding:25px;
+}
+
+.target{
+font-size:22px;
+margin:10px;
+}
+
+.progressbar{
+width:80%;
+background:#ddd;
+margin:auto;
+height:25px;
+border-radius:20px;
+}
+
+.progress{
+background:#c62828;
+height:25px;
+width:0%;
+border-radius:20px;
+}
+
+.stats{
+font-size:20px;
+margin-top:10px;
+}
+
+form{
+margin-top:30px;
+}
+
+input{
+padding:12px;
+width:250px;
+margin:10px;
+font-size:16px;
+}
+
+button{
+padding:12px 25px;
+background:#c62828;
+color:white;
+border:none;
+font-size:18px;
+cursor:pointer;
+}
+
+button:hover{
+background:#a91e1e;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+URGENT FUNDRAISER
+</div>
+
+<div class="container">
+
+<h2>Help Save A Child's Home</h2>
+
+<p>
+A young village boy is at risk of losing his home.  
+His parents are daily wage labourers but they continue  
+to support his education with great sacrifice and hope.
+</p>
+
+<div class="target">
+Target: ₹3,00,000
+</div>
+
+<div class="progressbar">
+<div id="progress" class="progress"></div>
+</div>
+
+<div class="stats">
+₹<span id="raised">0</span> Raised <br>
+<span id="donors">0</span> Donors
+</div>
+
+<form id="donationForm">
+
+<input type="text" id="name" placeholder="Your Name" required>
+
+<br>
+
+<input 
+type="number" 
+id="amount" 
+value="200"
+min="200"
+placeholder="Donation Amount"
+required>
+
+<br>
+
+<button type="submit">
+Donate via UPI
+</button>
+
+</form>
+
+</div>
+
+<script>
+
+let target = 300000
+
+let raised = localStorage.getItem("raised") || 0
+let donors = localStorage.getItem("donors") || 0
+
+document.getElementById("raised").innerText = raised
+document.getElementById("donors").innerText = donors
+
+let percent = (raised/target)*100
+document.getElementById("progress").style.width = percent + "%"
+
+document.getElementById("donationForm").addEventListener("submit",function(e){
+
+e.preventDefault()
+
+let name = document.getElementById("name").value
+let amount = document.getElementById("amount").value
+
+if(amount < 200){
+alert("Minimum donation amount is ₹200")
+return
+}
+
+raised = Number(raised) + Number(amount)
+donors = Number(donors) + 1
+
+localStorage.setItem("raised",raised)
+localStorage.setItem("donors",donors)
+
+let upiLink = "upi://pay?pa=shakshikabra7@oksbi&pn=Fundraiser&am=" + amount + "&cu=INR"
+
+window.location.href = upiLink
+
+})
+
+</script>
+
+</body>
+</html>
