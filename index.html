@@ -161,9 +161,15 @@ donors = Number(donors) + 1
 localStorage.setItem("raised",raised)
 localStorage.setItem("donors",donors)
 
-let upiLink = "upi://pay?pa=shakshikabra7@oksbi&pn=Fundraiser&am=" + amount + "&cu=INR"
+let upiID = "shakshikabra7@oksbi"
+
+let upiLink = `upi://pay?pa=${upiID}&pn=Fundraiser&am=${amount}&cu=INR`
 
 window.location.href = upiLink
+
+setTimeout(function(){
+alert("If UPI app did not open, please scan the QR code or open this page on your mobile with a UPI app installed.")
+},2000)
 
 })
 
